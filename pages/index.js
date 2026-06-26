@@ -22,7 +22,6 @@ export default function Home() {
       return;
     }
 
-    // Rule-based Copywriting Engine
     const proposal = `Hi ${clientName},
 
 I read through your project details regarding: "${projectDetails}". 
@@ -38,7 +37,6 @@ My bid for this project is $${price}.
 
 I can start immediately. Let's hop on a quick chat to align on the details.`;
 
-    // The High-Value Locked Content (Scope of Work)
     const sow = `SCOPE OF WORK AGREEMENT
 
 Project: ${projectDetails}
@@ -65,88 +63,142 @@ Agreed Price: $${price}
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', fontFamily: 'Arial, sans-serif', padding: '20px' }}>
-      <h1 style={{ color: '#2c3e50', textAlign: 'center' }}>Freelance Proposal & SOW Generator</h1>
-      <p style={{ color: '#7f8c8d', textAlign: 'center' }}>Win more clients and protect yourself from scope creep. Instantly generate persuasive proposals and legal SOWs.</p>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '30px' }}>
-        <input 
-          type="text" 
-          placeholder="Client Name (e.g., John)" 
-          value={clientName} 
-          onChange={(e) => setClientName(e.target.value)} 
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <textarea 
-          placeholder="Client's Project Details (Copy/paste their job description here)" 
-          value={projectDetails} 
-          onChange={(e) => setProjectDetails(e.target.value)} 
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', minHeight: '100px' }}
-        />
-        <textarea 
-          placeholder="Your Proposed Solution (What will you actually do for them?)" 
-          value={yourSolution} 
-          onChange={(e) => setYourSolution(e.target.value)} 
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', minHeight: '100px' }}
-        />
-        <input 
-          type="text" 
-          placeholder="Your Price (e.g., 500)" 
-          value={price} 
-          onChange={(e) => setPrice(e.target.value)} 
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <button 
-          onClick={generateProposal} 
-          style={{ padding: '15px', background: '#27ae60', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}
-        >
-          Generate Proposal & Contract
-        </button>
-      </div>
-
-      {result && (
-        <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          
-          {/* PROPOSAL (Free) */}
-          <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', position: 'relative' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <h3 style={{ margin: 0, color: '#2c3e50' }}>The Proposal (Free)</h3>
-              <button onClick={() => copyToClipboard(result.proposal)} style={{ padding: '5px 10px', background: '#2c3e50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                {copied ? 'Copied!' : 'Copy'}
-              </button>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#09090b', 
+      color: '#e4e4e7', 
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      padding: '40px 20px'
+    }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.02em', background: 'linear-gradient(to right, #e4e4e7, #a1a1aa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            Freelance Proposal Generator
+          </h1>
+          <p style={{ color: '#71717a', marginTop: '10px', fontSize: '1.1rem' }}>
+            Win high-ticket clients and protect yourself from scope creep.
+          </p>
+        </div>
+        
+        <div style={{ background: 'rgba(24, 24, 27, 0.8)', border: '1px solid #27272a', borderRadius: '12px', padding: '24px', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.875rem', color: '#a1a1aa', marginBottom: '6px', display: 'block' }}>Client Name</label>
+              <input 
+                type="text" 
+                placeholder="John Doe" 
+                value={clientName} 
+                onChange={(e) => setClientName(e.target.value)} 
+                style={{ width: '100%', background: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '12px', color: '#fff', outline: 'none', boxSizing: 'border-box' }}
+              />
             </div>
-            <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit', color: '#333', lineHeight: '1.6' }}>
-              {result.proposal}
-            </pre>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.875rem', color: '#a1a1aa', marginBottom: '6px', display: 'block' }}>Your Price ($)</label>
+              <input 
+                type="text" 
+                placeholder="1500" 
+                value={price} 
+                onChange={(e) => setPrice(e.target.value)} 
+                style={{ width: '100%', background: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '12px', color: '#fff', outline: 'none', boxSizing: 'border-box' }}
+              />
+            </div>
           </div>
+          <div>
+            <label style={{ fontSize: '0.875rem', color: '#a1a1aa', marginBottom: '6px', display: 'block' }}>Client's Project Details</label>
+            <textarea 
+              placeholder="Copy/paste the client's job description or problem here..." 
+              value={projectDetails} 
+              onChange={(e) => setProjectDetails(e.target.value)} 
+              style={{ width: '100%', background: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '12px', color: '#fff', outline: 'none', minHeight: '80px', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div>
+            <label style={{ fontSize: '0.875rem', color: '#a1a1aa', marginBottom: '6px', display: 'block' }}>Your Proposed Solution</label>
+            <textarea 
+              placeholder="Explain exactly what you will do for them..." 
+              value={yourSolution} 
+              onChange={(e) => setYourSolution(e.target.value)} 
+              style={{ width: '100%', background: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '12px', color: '#fff', outline: 'none', minHeight: '80px', boxSizing: 'border-box' }}
+            />
+          </div>
+          <button 
+            onClick={generateProposal} 
+            style={{ marginTop: '8px', padding: '16px', background: '#fff', color: '#000', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '1rem', transition: 'opacity 0.2s' }}
+          >
+            Generate Documents Instantly
+          </button>
+        </div>
 
-          {/* SOW (Locked) */}
-          <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', position: 'relative', border: '2px solid #e74c3c' }}>
-            <h3 style={{ margin: 0, color: '#e74c3c', marginBottom: '10px' }}>Scope of Work Contract (Protects You)</h3>
-            <div style={{ filter: isUnlocked ? 'none' : 'blur(6px)', pointerEvents: isUnlocked ? 'auto' : 'none' }}>
-              <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit', color: '#333', lineHeight: '1.6' }}>
-                {result.sow}
-              </pre>
-              {isUnlocked && (
-                <button onClick={() => copyToClipboard(result.sow)} style={{ marginTop: '10px', padding: '5px 10px', background: '#e74c3c', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                  Copy SOW
+        {result && (
+          <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            
+            {/* PROPOSAL (Free) */}
+            <div style={{ background: 'rgba(24, 24, 27, 0.8)', border: '1px solid #27272a', borderRadius: '12px', padding: '24px', backdropFilter: 'blur(10px)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <h3 style={{ margin: 0, color: '#fff', fontSize: '1.2rem' }}>The Proposal</h3>
+                <button onClick={() => copyToClipboard(result.proposal)} style={{ padding: '8px 16px', background: '#27272a', color: '#fff', border: '1px solid #3f3f46', borderRadius: '6px', cursor: 'pointer', fontSize: '0.875rem' }}>
+                  {copied ? 'Copied!' : 'Copy Text'}
                 </button>
+              </div>
+              <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit', color: '#d4d4d8', lineHeight: '1.6', margin: 0 }}>
+                {result.proposal}
+              </pre>
+            </div>
+
+            {/* SOW (Locked) */}
+            <div style={{ 
+              background: 'rgba(24, 24, 27, 0.8)', 
+              border: '1px solid #27272a', 
+              borderRadius: '12px', 
+              padding: '24px', 
+              backdropFilter: 'blur(10px)', 
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: '0 0 40px rgba(0,0,0,0.5)'
+            }}>
+              <h3 style={{ margin: '0 0 16px 0', color: '#fff', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: '8px', height: '8px', background: '#fbbf24', borderRadius: '50%', display: 'inline-block' }}></span>
+                Scope of Work Contract
+              </h3>
+              <div style={{ filter: isUnlocked ? 'none' : 'blur(6px)', pointerEvents: isUnlocked ? 'auto' : 'none' }}>
+                <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit', color: '#d4d4d8', lineHeight: '1.6', margin: 0 }}>
+                  {result.sow}
+                </pre>
+                {isUnlocked && (
+                  <button onClick={() => copyToClipboard(result.sow)} style={{ marginTop: '16px', padding: '8px 16px', background: '#fbbf24', color: '#000', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                    Copy Contract
+                  </button>
+                )}
+              </div>
+              
+              {!isUnlocked && (
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)', 
+                  background: '#09090b', 
+                  padding: '32px', 
+                  border: '1px solid #fbbf24', 
+                  borderRadius: '12px', 
+                  textAlign: 'center', 
+                  width: '340px',
+                  boxShadow: '0 0 30px rgba(251, 191, 36, 0.1)'
+                }}>
+                  <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '1.1rem', color: '#fbbf24' }}>Unlock Legal Protection</p>
+                  <p style={{ fontSize: '0.9rem', marginBottom: '24px', color: '#a1a1aa', lineHeight: '1.4' }}>
+                    Don't lose money to scope creep. Generate the official Scope of Work contract to lock in your terms.
+                  </p>
+                  <a href="STRIPE_PAYMENT_LINK_HERE" style={{ background: '#fbbf24', color: '#000', padding: '12px 24px', textDecoration: 'none', borderRadius: '8px', fontWeight: '700', display: 'inline-block', fontSize: '0.95rem' }}>
+                    Unlock Contract for $9
+                  </a>
+                </div>
               )}
             </div>
-            
-            {!isUnlocked && (
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '25px', border: '2px solid #e74c3c', borderRadius: '10px', textAlign: 'center', width: '320px', boxShadow: '0 10px 15px rgba(0,0,0,0.1)' }}>
-                <p style={{ fontWeight: 'bold', marginBottom: '10px', fontSize: '18px' }}>Don't Get Scammed By Clients</p>
-                <p style={{ fontSize: '14px', marginBottom: '20px', color: '#666' }}>Unlock the legal Scope of Work contract to prevent unpaid revisions and scope creep. Pay once, use forever.</p>
-                <a href="STRIPE_PAYMENT_LINK_HERE" style={{ background: '#635bff', color: 'white', padding: '12px 25px', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold', display: 'inline-block' }}>
-                  Unlock Contract for $9
-                </a>
-              </div>
-            )}
-          </div>
 
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
