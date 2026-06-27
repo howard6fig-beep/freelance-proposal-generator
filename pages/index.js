@@ -35,7 +35,10 @@ By partnering with me, you aren't just getting a task done; you are getting a pa
 
 My bid for this project is $${price}. 
 
-I can start immediately. Let's hop on a quick chat to align on the details.`;
+I can start immediately. Let's hop on a quick chat to align on the details.
+
+---
+Proposal generated via Freelance Proposal Generator (https://freelance-proposal-generator-azure.vercel.app/)`;
 
     const sow = `SCOPE OF WORK AGREEMENT
 
