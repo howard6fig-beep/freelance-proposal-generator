@@ -189,7 +189,7 @@ Agreed Price: $${price}
                   <p style={{ fontSize: '0.9rem', marginBottom: '24px', color: '#a1a1aa', lineHeight: '1.4' }}>
                     Don't lose money to scope creep. Generate the official Scope of Work contract to lock in your terms.
                   </p>
-                  <a href="STRIPE_PAYMENT_LINK_HERE" style={{ background: '#fbbf24', color: '#000', padding: '12px 24px', textDecoration: 'none', borderRadius: '8px', fontWeight: '700', display: 'inline-block', fontSize: '0.95rem' }}>
+                  <a href="https://buy.stripe.com/7sY7sN77v2YK2gp1EI1B605" style={{ background: '#fbbf24', color: '#000', padding: '12px 24px', textDecoration: 'none', borderRadius: '8px', fontWeight: '700', display: 'inline-block', fontSize: '0.95rem' }}>
                     Unlock Contract for $9
                   </a>
                 </div>
